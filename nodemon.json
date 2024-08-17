@@ -1,0 +1,6 @@
+{
+  "watch": ["src", "content"],
+  "ext": ".js,.ts,.md",
+  "ignore": [],
+  "exec": "npm run exec"
+}
