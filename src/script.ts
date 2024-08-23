@@ -7,6 +7,8 @@ type Metadata = {
   description: string;
   date: Date;
   slug: string;
+  tags: string;
+  imageUrl: string;
 };
 
 const myFile = readFileSync("content/test.md", "utf-8");
