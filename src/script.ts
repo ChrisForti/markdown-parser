@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import splitMetadataFromMDContent from "parse-md";
+import { Marked } from "marked";
 
 type Metadata = {
   published: boolean;
@@ -17,26 +18,57 @@ const { metadata, content } = splitMetadataFromMDContent(myFile) as {
   content: string;
 };
 
-if (typeof metadata.published != "boolean") {
-  throw new Error("The markdown must contain a published boolean.");
-}
-if (typeof metadata.title != "string") {
-  throw new Error("The markdown must contain a valid title string.");
-}
-if (typeof metadata.description != "string") {
-  throw new Error("The markdown must contain a valid description string.");
-}
-if (typeof metadata.date != "string") {
-  throw new Error("The markdown must contain a valid date object.");
-}
-if (typeof metadata.slug != "string") {
-  throw new Error("The markdown must contain a valid slug string.");
-}
+const marked = new Marked();
+const html = marked.parse(content);
 
-// These are incase we make tags and imageUrl a required prop.
-// if (typeof metadata.tags != "string") {
-//   throw new Error("The markdown must contain a valid tags string.");
-// }
-// if (typeof metadata.imageUrl != "string") {
-//   throw new Error("The markdown must contain a valid imageUrl string.");
-// }
+const output = {
+  id: "anything",
+  metadata,
+  html,
+};
+
+function validateMetadata(metadata: unknown, fileName: string) {
+  if (typeof metadata != "object" || metadata === null) {
+    return false;
+  }
+
+  const { published, title, description, date, slug, tags, imageUrl } =
+    metadata as Metadata;
+  try {
+    if (typeof published !== "boolean") {
+      throw new Error("The markdown must contain a published boolean.");
+    }
+    if (typeof title !== "string") {
+      throw new Error("The markdown must contain a valid title string.");
+    }
+    if (typeof description !== "string") {
+      throw new Error("The markdown must contain a valid description string.");
+    }
+    if (!(date instanceof Date)) {
+      throw new Error("The markdown must contain a valid date object.");
+    }
+    if (typeof slug !== "string") {
+      throw new Error("The markdown must contain a valid slug string.");
+    }
+    if (
+      imageUrl &&
+      !imageUrl.startsWith("http://") &&
+      !imageUrl.startsWith("https://") &&
+      !imageUrl.startsWith("/")
+    ) {
+      throw new Error(
+        "imageUrl must be an absolute URL or a path starting with /\nExample: /images/my-image.jpg for image in public folder\nOr: https://example.com/image.jpg for an external image"
+      );
+    }
+  } catch (error) {
+    if ("message" in (error as Error)) {
+      console.error(
+        "There was an error inside of " + fileName + ":\n",
+        // @ts-expect-error
+        error.message
+      );
+    }
+    return false;
+  }
+  return true;
+}

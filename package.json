@@ -18,6 +18,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "marked": "^14.0.0",
     "parse-md": "^3.0.3"
   }
 }
