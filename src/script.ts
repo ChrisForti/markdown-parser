@@ -7,8 +7,8 @@ type Metadata = {
   description: string;
   date: Date;
   slug: string;
-  tags: string;
-  imageUrl: string;
+  tags: string[];
+  imageUrl?: string;
 };
 
 const myFile = readFileSync("content/test.md", "utf-8");
@@ -18,5 +18,14 @@ const { metadata, content } = splitMetadataFromMDContent(myFile) as {
 };
 
 if (typeof metadata.published != "boolean") {
+  throw new Error("The markdown must contain a published boolean.");
+}
+if (typeof metadata.title != "string") {
+  throw new Error("The markdown must contain a published boolean.");
+}
+if (typeof metadata.description != "string") {
+  throw new Error("The markdown must contain a published boolean.");
+}
+if (typeof metadata.date != "string") {
   throw new Error("The markdown must contain a published boolean.");
 }
