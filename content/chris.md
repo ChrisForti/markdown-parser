@@ -7,7 +7,7 @@ author: "Author Name"
 tags: # tag is a way to organize and classify content.
   - tag1
   - tag2
-imageUrl: "./assets/local-cvLogo.png"
+imageUrl: "/local-cvLogo.png"
 slug: "post-title"
 ---
 
