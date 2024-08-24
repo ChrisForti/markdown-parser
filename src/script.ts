@@ -11,7 +11,7 @@ type Metadata = {
   imageUrl?: string;
 };
 
-const myFile = readFileSync("content/test.md", "utf-8");
+const myFile = readFileSync("content/chris.md", "utf-8");
 const { metadata, content } = splitMetadataFromMDContent(myFile) as {
   metadata: Metadata;
   content: string;
