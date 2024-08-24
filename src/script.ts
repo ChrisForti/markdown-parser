@@ -29,6 +29,14 @@ if (typeof metadata.description != "string") {
 if (typeof metadata.date != "string") {
   throw new Error("The markdown must contain a valid date object.");
 }
-if (typeof metadata.date != "string") {
-  throw new Error("The markdown must contain a valid date object.");
+if (typeof metadata.slug != "string") {
+  throw new Error("The markdown must contain a valid slug string.");
 }
+
+// These are incase we make tags and imageUrl a required prop.
+// if (typeof metadata.tags != "string") {
+//   throw new Error("The markdown must contain a valid tags string.");
+// }
+// if (typeof metadata.imageUrl != "string") {
+//   throw new Error("The markdown must contain a valid imageUrl string.");
+// }
