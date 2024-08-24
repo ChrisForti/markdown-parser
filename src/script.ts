@@ -7,7 +7,7 @@ type Metadata = {
   description: string;
   date: Date;
   slug: string;
-  tags: string[];
+  tags?: string[];
   imageUrl?: string;
 };
 
@@ -21,11 +21,14 @@ if (typeof metadata.published != "boolean") {
   throw new Error("The markdown must contain a published boolean.");
 }
 if (typeof metadata.title != "string") {
-  throw new Error("The markdown must contain a published boolean.");
+  throw new Error("The markdown must contain a valid title string.");
 }
 if (typeof metadata.description != "string") {
-  throw new Error("The markdown must contain a published boolean.");
+  throw new Error("The markdown must contain a valid description string.");
 }
 if (typeof metadata.date != "string") {
-  throw new Error("The markdown must contain a published boolean.");
+  throw new Error("The markdown must contain a valid date object.");
+}
+if (typeof metadata.date != "string") {
+  throw new Error("The markdown must contain a valid date object.");
 }
