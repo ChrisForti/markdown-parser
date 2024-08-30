@@ -14,11 +14,13 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.4.0",
+    "@types/uuid": "^10.0.0",
     "nodemon": "^3.1.4",
     "typescript": "^5.5.4"
   },
   "dependencies": {
     "marked": "^14.0.0",
-    "parse-md": "^3.0.3"
+    "parse-md": "^3.0.3",
+    "uuid": "^10.0.0"
   }
 }
