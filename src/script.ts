@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import splitMetadataFromMDContent from "parse-md";
 import { Marked } from "marked";
+import { v4 as uuidv4 } from "uuid";
 
 type Metadata = {
   published: boolean;
@@ -11,21 +12,23 @@ type Metadata = {
   tags?: string[];
   imageUrl?: string;
 };
+function parseMarkdownFile(filepath: string) {
+  const myFile = readFileSync("content/chris.md", "utf-8");
+  const { metadata, content } = splitMetadataFromMDContent(myFile) as {
+    metadata: Metadata;
+    content: string;
+  };
 
-const myFile = readFileSync("content/chris.md", "utf-8");
-const { metadata, content } = splitMetadataFromMDContent(myFile) as {
-  metadata: Metadata;
-  content: string;
-};
+  const marked = new Marked();
+  const html = marked.parse(content);
 
-const marked = new Marked();
-const html = marked.parse(content);
-
-const output = {
-  id: "anything",
-  metadata,
-  html,
-};
+  const output = {
+    id: uuidv4(),
+    metadata,
+    html,
+  };
+  return output;
+}
 
 function validateMetadata(metadata: unknown, fileName: string) {
   if (typeof metadata != "object" || metadata === null) {

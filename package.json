@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "marked": "^14.0.0",
-    "parse-md": "^3.0.3"
+    "parse-md": "^3.0.3",
+    "uuidv4": "^6.2.13"
   }
 }
