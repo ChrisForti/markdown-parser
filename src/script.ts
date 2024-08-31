@@ -29,7 +29,7 @@ function buildPostsFromMarkdown() {
       console.log("parsing", file);
       const post = parseMarkdownFile(`./content/${file}`);
       if (!post) {
-        console.log("Error in" + file + ", skipping");
+        console.log("\x1b[34mError in " + file + ", skipping \x1b[0m");
         return null;
       }
       output.push(post);
@@ -49,7 +49,7 @@ function parseMarkdownFile(filePath: string) {
   };
   const fileName = filePath.split("/").pop();
   if (!fileName) {
-    console.error("	\x1b[31mBad path: ", filePath, "	\x1b[0m");
+    console.error("	\x1b[33mBad path: ", filePath, "	\x1b[0m");
     return null;
   }
   if (!validateMetadata(metadata, fileName)) {
@@ -77,19 +77,29 @@ function validateMetadata(metadata: unknown, fileName: string) {
     metadata as Metadata;
   try {
     if (typeof published !== "boolean") {
-      throw new Error("The markdown must contain a published boolean.");
+      throw new Error(
+        "	\x1b[31mThe markdown must contain a published boolean.	\x1b[0m"
+      );
     }
     if (typeof title !== "string") {
-      throw new Error("The markdown must contain a valid title string.");
+      throw new Error(
+        " 	\x1b[31mThe markdown must contain a valid title string.	\x1b[0m"
+      );
     }
     if (typeof description !== "string") {
-      throw new Error("The markdown must contain a valid description string.");
+      throw new Error(
+        " 	\x1b[31mThe markdown must contain a valid description string.	\x1b[0m"
+      );
     }
     if (!(date instanceof Date)) {
-      throw new Error("The markdown must contain a valid date object.");
+      throw new Error(
+        " 	\x1b[31mThe markdown must contain a valid date object.	\x1b[0m"
+      );
     }
     if (typeof slug !== "string") {
-      throw new Error("The markdown must contain a valid slug string.");
+      throw new Error(
+        "	\x1b[31mThe markdown must contain a valid slug string.	\x1b[0m"
+      );
     }
     if (
       imageUrl &&
@@ -104,7 +114,7 @@ function validateMetadata(metadata: unknown, fileName: string) {
   } catch (error) {
     if ("message" in (error as Error)) {
       console.error(
-        "There was an error inside of " + fileName + ":\n",
+        " \x1b[34mThere was an error inside of " + fileName + ":\n\x1b[0m",
         // @ts-expect-error
         error.message
       );

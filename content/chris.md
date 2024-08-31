@@ -1,6 +1,6 @@
 ---
 title: Understanding TypeScript
-published: true
+published:
 description: A comprehensive guide to TypeScript.
 date: 2024-03-04
 slug: understanding-typescript
@@ -8,16 +8,6 @@ tags:
   - typescript
   - programming
 imageUrl: https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80
-# title: "Post Title"
-# description: "A brief description of the post."
-# published: true
-# date: "2024-03-04"
-# author: "Author Name"
-# tags: # tag is a way to organize and classify content.
-#   - tag1
-#   - tag2
-# imageUrl: "/local-cvLogo.png"
-# slug: "post-title"
 ---
 
 # Content
