@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFileSync, readdirSync, writeFileSync } from "fs";
 import splitMetadataFromMDContent from "parse-md";
 import { Marked } from "marked";
 import { v4 as uuidv4 } from "uuid";
@@ -12,12 +12,50 @@ type Metadata = {
   tags?: string[];
   imageUrl?: string;
 };
-function parseMarkdownFile(filepath: string) {
-  const myFile = readFileSync("content/chris.md", "utf-8");
+
+type Post = {
+  id: string;
+  metadata: Metadata;
+  html: string;
+};
+
+function buildPostsFromMarkdown() {
+  try {
+    const files = readdirSync("./content").filter((file) =>
+      file.endsWith(".md")
+    );
+    const output: Post[] = [];
+    files.forEach((file) => {
+      console.log("parsing", file);
+      const post = parseMarkdownFile(`./content/${file}`);
+      if (!post) {
+        console.log("Error in" + file + ", skipping");
+        return null;
+      }
+      output.push(post);
+    });
+    writeFileSync("./content/posts.json", JSON.stringify(output, null, 2));
+  } catch (error) {
+    console.error(error);
+  }
+}
+buildPostsFromMarkdown();
+
+function parseMarkdownFile(filePath: string) {
+  const myFile = readFileSync(filePath, "utf-8");
   const { metadata, content } = splitMetadataFromMDContent(myFile) as {
     metadata: Metadata;
     content: string;
   };
+  const fileName = filePath.split("/").pop();
+  if (!fileName) {
+    console.error("Bad path: ", filePath);
+    return null;
+  }
+  if (!validateMetadata(metadata, fileName)) {
+    console.error("	\x1b[33minvalid metadata in", fileName, "	\x1b[0m");
+    return null;
+  }
 
   const marked = new Marked();
   const html = marked.parse(content);
@@ -27,9 +65,9 @@ function parseMarkdownFile(filepath: string) {
     metadata,
     html,
   };
-  return output;
+  return output as Post;
 }
-
+console.log(parseMarkdownFile("content/example.md"));
 function validateMetadata(metadata: unknown, fileName: string) {
   if (typeof metadata != "object" || metadata === null) {
     return false;
