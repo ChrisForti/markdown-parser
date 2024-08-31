@@ -49,7 +49,7 @@ function parseMarkdownFile(filePath: string) {
   };
   const fileName = filePath.split("/").pop();
   if (!fileName) {
-    console.error("Bad path: ", filePath);
+    console.error("	\x1b[31mBad path: ", filePath, "	\x1b[0m");
     return null;
   }
   if (!validateMetadata(metadata, fileName)) {
@@ -67,7 +67,7 @@ function parseMarkdownFile(filePath: string) {
   };
   return output as Post;
 }
-console.log(parseMarkdownFile("content/example.md"));
+console.log(parseMarkdownFile("content/chris.md"));
 function validateMetadata(metadata: unknown, fileName: string) {
   if (typeof metadata != "object" || metadata === null) {
     return false;
