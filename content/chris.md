@@ -7,7 +7,7 @@ slug: understanding-typescript
 tags:
   - typescript
   - programming
-imageUrl: "/local-cvLogo.png"
+imageUrl: "./assets/local-cvLogo.png"
 ---
 
 # Content

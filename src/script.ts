@@ -67,7 +67,7 @@ function parseMarkdownFile(filePath: string) {
   };
   return output as Post;
 }
-console.log(parseMarkdownFile("content/chris.md"));
+
 function validateMetadata(metadata: unknown, fileName: string) {
   if (typeof metadata != "object" || metadata === null) {
     return false;
@@ -78,27 +78,27 @@ function validateMetadata(metadata: unknown, fileName: string) {
   try {
     if (typeof published !== "boolean") {
       throw new Error(
-        "	\x1b[31mThe markdown must contain a published boolean.	\x1b[0m"
+        "\x1b[31mThe markdown must contain a published boolean.	\x1b[0m"
       );
     }
     if (typeof title !== "string") {
       throw new Error(
-        " 	\x1b[31mThe markdown must contain a valid title string.	\x1b[0m"
+        "\x1b[31mThe markdown must contain a valid title string.	\x1b[0m"
       );
     }
     if (typeof description !== "string") {
       throw new Error(
-        " 	\x1b[31mThe markdown must contain a valid description string.	\x1b[0m"
+        "\x1b[31mThe markdown must contain a valid description string.	\x1b[0m"
       );
     }
     if (!(date instanceof Date)) {
       throw new Error(
-        " 	\x1b[31mThe markdown must contain a valid date object.	\x1b[0m"
+        "\x1b[31mThe markdown must contain a valid date object.	\x1b[0m"
       );
     }
     if (typeof slug !== "string") {
       throw new Error(
-        "	\x1b[31mThe markdown must contain a valid slug string.	\x1b[0m"
+        "\x1b[31mThe markdown must contain a valid slug string.	\x1b[0m"
       );
     }
     if (
@@ -108,13 +108,13 @@ function validateMetadata(metadata: unknown, fileName: string) {
       !imageUrl.startsWith("/")
     ) {
       throw new Error(
-        "		\x1b[35mimageUrl must be an absolute URL or a path starting with /\nExample: /images/my-image.jpg for image in public folder\nOr: https://example.com/image.jpg for an external image		\x1b[0m"
+        "\x1b[31mimageUrl must be an absolute URL or a path starting with /\nExample: /images/my-image.jpg for image in public folder\nOr: https://example.com/image.jpg for an external image\x1b[0m"
       );
     }
   } catch (error) {
     if ("message" in (error as Error)) {
       console.error(
-        " \x1b[34mThere was an error inside of " + fileName + ":\n\x1b[0m",
+        "\x1b[34mThere was an error inside of " + fileName + ":\n\x1b[0m",
         // @ts-expect-error
         error.message
       );
