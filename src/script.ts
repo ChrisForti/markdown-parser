@@ -28,7 +28,6 @@ function buildPostsFromMarkdown() {
     );
     const output: Post[] = [];
     files.forEach((file) => {
-      console.log("parsing", file);
       const post = parseMarkdownFile(`./content/${file}`);
       if (!post) {
         console.log("\x1b[34mError in " + file + ", skipping \x1b[0m");
