@@ -4,6 +4,8 @@ title: Test
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla blandit aliquam finibus. Sed venenatis placerat eros, eget pulvinar lacus elementum ut. In hac habitasse platea dictumst. Etiam sed erat quis odio vehicula consequat. Phasellus magna magna, dignissim at felis eu, pulvinar venenatis turpis. Sed molestie consectetur magna, eget aliquam erat fermentum at. Nam bibendum enim in quam consequat, ut ultricies orci pellentesque. Curabitur viverra, est efficitur cursus cursus, ante magna eleifend sapien, eget pellentesque eros erat sit amet ante. Integer volutpat hendrerit imperdiet. Nulla facilisi. Quisque laoreet sem dolor, sed porttitor turpis pulvinar quis.
 date: 2023-03-04
 slug: test
+author: "The Man"
+authorImage:
 ---
 
 # Test File
