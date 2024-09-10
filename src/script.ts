@@ -11,6 +11,8 @@ type Metadata = {
   slug: string;
   tags?: string[];
   imageUrl?: string;
+  author?: string;
+  authorImageUrl?: string;
 };
 type Post = {
   id: string;
